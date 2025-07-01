@@ -319,29 +319,29 @@ def main():
         with st.sidebar:
             st.markdown("""
             <div style="text-align: center; padding: 1rem;">
-                <h2>🎛️ Control Panel</h2>
+                <h2> Control Panel</h2>
             </div>
             """, unsafe_allow_html=True)
             
             users = df['reviewerId'].unique()
-            selected_user = st.selectbox("👤 Select User", users, key="user_select")
+            selected_user = st.selectbox(" Select User", users, key="user_select")
             
-            num_recs = st.slider("📊 Number of Recommendations", 1, 10, 5)
+            num_recs = st.slider(" Number of Recommendations", 1, 10, 5)
             
-            algorithm = st.selectbox("🧠 Algorithm", 
+            algorithm = st.selectbox(" Algorithm", 
                                    ["AI Hybrid", "Collaborative Filtering", "Popularity-Based"])
             
-            show_analytics = st.checkbox("📈 Show Analytics Dashboard", value=True)
+            show_analytics = st.checkbox(" Show Analytics Dashboard", value=True)
         
         # Main content tabs
-        tab1, tab2, tab3 = st.tabs(["🎯 Get Recommendations", "🔍 Explore Restaurants", "👤 User Profile"])
+        tab1, tab2, tab3 = st.tabs([" Get Recommendations", "🔍 Explore Restaurants", "👤 User Profile"])
         
         with tab1:
             col1, col2 = st.columns([2, 1])
             
             with col1:
-                if st.button("✨ Generate Recommendations", type="primary"):
-                    with st.spinner("🤖 AI is thinking..."):
+                if st.button(" Generate Recommendations", type="primary"):
+                    with st.spinner(" AI is thinking..."):
                         if algorithm == "Collaborative Filtering":
                             recommendations = get_recommendations(selected_user, user_item_matrix, num_recs)
                             display_recommendations(recommendations, df, "Collaborative Filtering")
@@ -357,7 +357,7 @@ def main():
             with col2:
                 st.markdown("""
                 <div class="info-card">
-                    <h3 style="margin:0;">💡 How it works</h3>
+                    <h3 style="margin:0;"> How it works</h3>
                     <p style="margin:0.5rem 0;">Our AI analyzes your preferences and finds similar users to recommend restaurants you'll love!</p>
                 </div>
                 """, unsafe_allow_html=True)
@@ -377,7 +377,7 @@ def main():
                         st.markdown(f"""
                         <div class="recommendation-card">
                             <div class="restaurant-title">{restaurant}</div>
-                            <div>⭐ {data['Avg Rating']:.1f} | 📝 {data['Review Count']} reviews</div>
+                            <div> {data['Avg Rating']:.1f} | 📝 {data['Review Count']} reviews</div>
                         </div>
                         """, unsafe_allow_html=True)
         
@@ -399,11 +399,11 @@ def main():
                     st.metric("Restaurants Visited", user_data['title'].nunique())
                 
                 # User's review history
-                st.subheader("📝 Recent Reviews")
+                st.subheader(" Recent Reviews")
                 for _, review in user_data.head(5).iterrows():
                     st.markdown(f"""
                     <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin: 0.5rem 0;">
-                        <strong>{review['title']}</strong> - {'⭐' * int(review['stars'])} ({review['stars']})
+                        <strong>{review['title']}</strong> - {'' * int(review['stars'])} ({review['stars']})
                     </div>
                     """, unsafe_allow_html=True)
         
@@ -415,12 +415,12 @@ def main():
     else:
         st.markdown("""
         <div class="info-card">
-            <h2 style="margin:0;">🚀 Welcome to RestaurantAI!</h2>
+            <h2 style="margin:0;"> Welcome to RestaurantAI!</h2>
             <p style="margin:0.5rem 0 0 0;">Upload your restaurant model to get started with AI-powered recommendations.</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.info("📁 Please ensure 'restaurant_model.pkl' is in the app directory")
+        st.info(" Please ensure 'restaurant_model.pkl' is in the app directory")
 
 if __name__ == "__main__":
     main()
