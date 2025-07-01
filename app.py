@@ -334,7 +334,7 @@ def main():
             show_analytics = st.checkbox(" Show Analytics Dashboard", value=True)
         
         # Main content tabs
-        tab1, tab2, tab3 = st.tabs([" Get Recommendations", "🔍 Explore Restaurants", "👤 User Profile"])
+        tab1, tab2, tab3 = st.tabs([" Get Recommendations", " Explore Restaurants", " User Profile"])
         
         with tab1:
             col1, col2 = st.columns([2, 1])
