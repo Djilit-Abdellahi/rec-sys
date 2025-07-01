@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import time
 
 # Page configuration
@@ -289,7 +286,7 @@ def display_recommendations(recommendations, df, algorithm="AI Hybrid"):
         """, unsafe_allow_html=True)
 
 def create_interactive_charts(df):
-    """Create interactive visualization dashboard"""
+    """Create visualization dashboard using Streamlit native charts"""
     st.markdown("""
     <div class="info-card">
         <h2 style="margin:0;">📊 Restaurant Analytics Dashboard</h2>
@@ -301,39 +298,17 @@ def create_interactive_charts(df):
     
     with col1:
         # Rating distribution
-        fig_ratings = px.histogram(
-            df, x='stars', 
-            title="⭐ Rating Distribution",
-            color='stars',
-            color_continuous_scale='viridis'
-        )
-        fig_ratings.update_layout(
-            plot_bgcolor='rgba(0,0,0,0)',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font_color='white'
-        )
-        st.plotly_chart(fig_ratings, use_container_width=True)
+        st.subheader("⭐ Rating Distribution")
+        rating_counts = df['stars'].value_counts().sort_index()
+        st.bar_chart(rating_counts)
     
     with col2:
         # Top restaurants
+        st.subheader("🏆 Top Rated Restaurants")
         top_restaurants = df.groupby('title')['stars'].agg(['mean', 'count'])
         top_restaurants = top_restaurants[top_restaurants['count'] >= 3]
         top_restaurants = top_restaurants.sort_values('mean', ascending=True).tail(10)
-        
-        fig_top = px.bar(
-            x=top_restaurants['mean'],
-            y=top_restaurants.index,
-            orientation='h',
-            title="🏆 Top Rated Restaurants",
-            color=top_restaurants['mean'],
-            color_continuous_scale='plasma'
-        )
-        fig_top.update_layout(
-            plot_bgcolor='rgba(0,0,0,0)',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font_color='white'
-        )
-        st.plotly_chart(fig_top, use_container_width=True)
+        st.bar_chart(top_restaurants['mean'])
 
 def main():
     # Header
