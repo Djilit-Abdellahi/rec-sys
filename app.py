@@ -6,8 +6,8 @@ import time
 
 # Page configuration
 st.set_page_config(
-    page_title="🍽️ RestaurantAI",
-    page_icon="🍽️",
+    page_title="💕 RestaurantDoll",
+    page_icon="💕",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -15,145 +15,131 @@ st.set_page_config(
 # Custom CSS for stunning UI
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600;700&display=swap');
 
 html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .main-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FF69B4 100%);
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: 25px;
     margin-bottom: 2rem;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 35px rgba(255,182,193,0.4);
+    border: 2px solid rgba(255,255,255,0.3);
 }
 
 .main-header h1 {
     color: white;
-    font-size: 3rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
     font-weight: 700;
     margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
 }
 
 .main-header p {
     color: white;
     font-size: 1.2rem;
     margin-top: 0.5rem;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-weight: 400;
 }
 
 .metric-card {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%);
     padding: 1.5rem;
-    border-radius: 15px;
+    border-radius: 20px;
     color: white;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(255,105,180,0.3);
     transition: transform 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .metric-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(255,105,180,0.4);
 }
 
 .recommendation-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1.5rem;
-    border-radius: 15px;
-    margin: 1rem 0;
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+    padding: 2rem;
+    border-radius: 25px;
+    margin: 1.5rem 0;
     color: white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 30px rgba(255,182,193,0.3);
     transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .recommendation-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(255,182,193,0.4);
 }
 
 .algorithm-badge {
-    background: rgba(255,255,255,0.2);
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
+    background: rgba(255,255,255,0.3);
+    padding: 0.4rem 1.2rem;
+    border-radius: 25px;
     font-size: 0.8rem;
     margin-bottom: 1rem;
     display: inline-block;
-}
-
-.sidebar .stSelectbox > div > div {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.4);
 }
 
 .stButton > button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%);
     color: white;
     border: none;
-    border-radius: 25px;
-    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    padding: 1rem 2.5rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(255,105,180,0.3);
+    font-family: 'Quicksand', sans-serif;
 }
 
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255,105,180,0.4);
 }
 
 .restaurant-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    font-family: 'Dancing Script', cursive;
 }
 
 .restaurant-score {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    color: #f5576c;
-}
-
-.animated-element {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    color: #FF1493;
+    text-shadow: 1px 1px 2px rgba(255,20,147,0.3);
 }
 
 .success-message {
-    background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-    padding: 1rem;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%);
+    padding: 1.5rem;
+    border-radius: 20px;
     color: white;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 25px rgba(255,105,180,0.3);
 }
 
 .info-card {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    padding: 1.5rem;
-    border-radius: 15px;
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+    padding: 2rem;
+    border-radius: 20px;
     color: white;
-    margin: 1rem 0;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.chart-container {
-    background: rgba(255,255,255,0.05);
-    padding: 1rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
+    margin: 1.5rem 0;
+    box-shadow: 0 12px 30px rgba(255,182,193,0.3);
+    border: 2px solid rgba(255,255,255,0.2);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -177,10 +163,10 @@ def create_animated_metrics(df):
     col1, col2, col3, col4 = st.columns(4)
     
     metrics = [
-        ("👥 Total Users", df['reviewerId'].nunique(), "users"),
-        ("🍽️ Restaurants", df['title'].nunique(), "venues"),
-        ("⭐ Reviews", len(df), "reviews"),
-        ("📊 Avg Rating", f"{df['stars'].mean():.1f}", "stars")
+        ("Lovely Users", df['reviewerId'].nunique(), "darlings"),
+        ("Sweet Spots", df['title'].nunique(), "cafes"),
+        ("Love Notes", len(df), "reviews"),
+        ("Stars Given", f"{df['stars'].mean():.1f}", "average")
     ]
     
     for i, (col, (title, value, suffix)) in enumerate(zip([col1, col2, col3, col4], metrics)):
@@ -200,7 +186,7 @@ def get_recommendations(user_id, user_item_matrix, top_k=5):
     progress_bar = st.progress(0)
     status_text = st.empty()
     
-    status_text.text('🔍 Analyzing user preferences...')
+    status_text.text('Finding your taste preferences...')
     progress_bar.progress(25)
     time.sleep(0.5)
     
@@ -212,14 +198,14 @@ def get_recommendations(user_id, user_item_matrix, top_k=5):
         columns=user_item_matrix.index
     )
     
-    status_text.text('🤝 Finding similar users...')
+    status_text.text('Discovering similar food lovers...')
     progress_bar.progress(50)
     time.sleep(0.5)
     
     similar_users = user_sim_df[user_id].sort_values(ascending=False)[1:11]
     similar_users = similar_users[similar_users > 0.1]
     
-    status_text.text('🎯 Generating recommendations...')
+    status_text.text('Creating perfect matches...')
     progress_bar.progress(75)
     time.sleep(0.5)
     
@@ -241,7 +227,7 @@ def get_recommendations(user_id, user_item_matrix, top_k=5):
             if similarity_sum > 0:
                 recommendations[restaurant] = weighted_sum / similarity_sum
     
-    status_text.text('✨ Finalizing results...')
+    status_text.text('Finalizing your perfect picks...')
     progress_bar.progress(100)
     time.sleep(0.5)
     
@@ -253,13 +239,13 @@ def get_recommendations(user_id, user_item_matrix, top_k=5):
 def display_recommendations(recommendations, df, algorithm="AI Hybrid"):
     """Display recommendations with beautiful cards"""
     if not recommendations:
-        st.warning("🤔 No recommendations found for this user.")
+        st.warning("Oopsie! No sweet recommendations found for this cutie.")
         return
     
     st.markdown(f"""
     <div class="success-message">
-        <h3 style="margin:0;">✨ Top {len(recommendations)} Recommendations ({algorithm})</h3>
-        <p style="margin:0.5rem 0 0 0;">Personalized just for you!</p>
+        <h3 style="margin:0;">Your Top {len(recommendations)} Perfect Matches ({algorithm})</h3>
+        <p style="margin:0.5rem 0 0 0;">Handpicked just for you, sweetie!</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -272,12 +258,12 @@ def display_recommendations(recommendations, df, algorithm="AI Hybrid"):
         # Create recommendation card
         st.markdown(f"""
         <div class="recommendation-card animated-element" style="animation-delay: {i*0.1}s;">
-            <div class="algorithm-badge">{algorithm} Algorithm</div>
+            <div class="algorithm-badge">{algorithm} Magic</div>
             <div class="restaurant-title">#{i+1} {restaurant}</div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <div style="font-size: 1rem; opacity: 0.9;">
-                        ⭐ Avg Rating: {avg_rating:.1f} | 📝 {num_reviews} reviews
+                        Rating: {avg_rating:.1f} hearts | {num_reviews} lovely reviews
                     </div>
                 </div>
                 <div class="restaurant-score">{score:.2f}</div>
@@ -289,8 +275,8 @@ def create_interactive_charts(df):
     """Create visualization dashboard using Streamlit native charts"""
     st.markdown("""
     <div class="info-card">
-        <h2 style="margin:0;">📊 Restaurant Analytics Dashboard</h2>
-        <p style="margin:0.5rem 0 0 0;">Explore insights from the data</p>
+        <h2 style="margin:0;">Sweet Analytics Dashboard</h2>
+        <p style="margin:0.5rem 0 0 0;">Discover the cutest insights from our data</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -298,13 +284,13 @@ def create_interactive_charts(df):
     
     with col1:
         # Rating distribution
-        st.subheader("⭐ Rating Distribution")
+        st.subheader("Rating Distribution")
         rating_counts = df['stars'].value_counts().sort_index()
         st.bar_chart(rating_counts)
     
     with col2:
         # Top restaurants
-        st.subheader("🏆 Top Rated Restaurants")
+        st.subheader("Top Rated Sweet Spots")
         top_restaurants = df.groupby('title')['stars'].agg(['mean', 'count'])
         top_restaurants = top_restaurants[top_restaurants['count'] >= 3]
         top_restaurants = top_restaurants.sort_values('mean', ascending=True).tail(10)
@@ -314,8 +300,8 @@ def main():
     # Header
     st.markdown("""
     <div class="main-header">
-        <h1>🍽️ RestaurantAI</h1>
-        <p>AI-Powered Restaurant Recommendations for Mauritania</p>
+        <h1>RestaurantDoll</h1>
+        <p>Your Cute AI Food Companion for Mauritania</p>
     </div>
     """, unsafe_allow_html=True)
     
