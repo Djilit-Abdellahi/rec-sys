@@ -2,7 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.metrics.pairwise import cosine_similarity
+
+def cosine_similarity_manual(matrix):
+    """Manual cosine similarity calculation"""
+    dot_product = np.dot(matrix, matrix.T)
+    norms = np.linalg.norm(matrix, axis=1)
+    return dot_product / np.outer(norms, norms)
 
 st.set_page_config(page_title="Restaurant Recommender", page_icon="🍽️", layout="wide")
 
@@ -16,7 +21,7 @@ def get_recommendations(user_id, user_item_matrix, top_k=5):
         return []
     
     # Calculate user similarity
-    user_similarity = cosine_similarity(user_item_matrix)
+    user_similarity = cosine_similarity_manual(user_item_matrix.values)
     user_sim_df = pd.DataFrame(
         user_similarity,
         index=user_item_matrix.index,
